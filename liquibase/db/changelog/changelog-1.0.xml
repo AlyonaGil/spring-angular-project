@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet id="20221012-00" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="INSTRUMENT" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы INSTRUMENT</comment>
+        <createTable tableName="INSTRUMENT">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(50)"/>
+            <column name="NUMBER" type="varchar(50)"/>
+            <column name="CREATE_DATE" type="timestamp(0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_DATE" type="timestamp(0)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="INSTRUMENT"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-01" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ROOM" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы ROOM</comment>
+        <createTable tableName="ROOM">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMBER" type="varchar(5)"/>
+            <column name="BLOCK" type="varchar(5)"/>
+            <column name="CREATE_DATE" type="timestamp(0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_DATE" type="timestamp(0)"/>
+        </createTable>
+<!--        <sql>-->
+<!--            CREATE TABLE ROOM(-->
+<!--                id serial primary key,-->
+<!--                idd int not null,-->
+<!--                number varchar(5),-->
+<!--                block varchar(5),-->
+<!--                create_date timestamp(0),-->
+<!--                delete_date timestamp(0)-->
+<!--            );-->
+<!--        </sql>-->
+        <rollback>
+            <dropTable tableName="ROOM"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-02" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="INSTRUMENT_TO_ROOM" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы INSTRUMENT_TO_ROOM</comment>
+        <createTable tableName="INSTRUMENT_TO_ROOM">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="INSTRUMENT_IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROOM_IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="INSTRUMENT_TO_ROOM"/>
+        </rollback>
+    </changeSet>
+    
+</databaseChangeLog>
