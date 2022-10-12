@@ -86,5 +86,190 @@
             <dropTable tableName="INSTRUMENT_TO_ROOM"/>
         </rollback>
     </changeSet>
+    <changeSet id="20221012-03" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="STUDENT" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы STUDENT</comment>
+        <createTable tableName="STUDENT">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="varchar(50)"/>
+            <column name="MIDDLE_NAME" type="varchar(50)"/>
+            <column name="LAST_NAME" type="varchar(50)"/>
+            <column name="PASSPORT" type="varchar(15)"/>
+            <column name="BIRTH_DATE" type="timestamp(0)"/>
+            <column name="CREATE_DATE" type="timestamp(0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_DATE" type="timestamp(0)"/>
+            <column name="STATUS" type="varchar(10)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="STUDENT"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-04" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TEACHER" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы TEACHER</comment>
+        <createTable tableName="TEACHER">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="varchar(50)"/>
+            <column name="MIDDLE_NAME" type="varchar(50)"/>
+            <column name="LAST_NAME" type="varchar(50)"/>
+            <column name="PASSPORT" type="varchar(15)"/>
+            <column name="BIRTH_DATE" type="timestamp(0)"/>
+            <column name="CREATE_DATE" type="timestamp(0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_DATE" type="timestamp(0)"/>
+            <column name="STATUS" type="varchar(10)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="TEACHER"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-05" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="USERS" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы USERS</comment>
+        <createTable tableName="USERS">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="varchar(50)"/>
+            <column name="MIDDLE_NAME" type="varchar(50)"/>
+            <column name="LAST_NAME" type="varchar(50)"/>
+            <column name="PASSPORT" type="varchar(15)"/>
+            <column name="BIRTH_DATE" type="timestamp(0)"/>
+            <column name="CREATE_DATE" type="timestamp(0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_DATE" type="timestamp(0)"/>
+            <column name="STATUS" type="varchar(10)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="USERS"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-06" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="COURSE" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы COURSE</comment>
+        <createTable tableName="COURSE">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(100)"/>
+            <column name="DESCRIPTION" type="varchar(500)"/>
+            <column name="TEACHER_IDD" type="int"/>
+            <column name="MAX_COUNT_STUDENT" type="int"/>
+            <column name="START_DATE" type="timestamp(0)"/>
+            <column name="END_DATE" type="timestamp(0)"/>
+            <column name="CREATE_DATE" type="timestamp(0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_DATE" type="timestamp(0)"/>
+            <column name="STATUS" type="varchar(10)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="COURSE"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-07" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="STUDENT_TO_COURSE" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы STUDENT_TO_COURSE</comment>
+        <createTable tableName="STUDENT_TO_COURSE">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="STUDENT_IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COURSE_IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUCCESS" type="BOOLEAN"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="STUDENT_TO_COURSE"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-08" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="LESSON" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы LESSON</comment>
+        <createTable tableName="LESSON">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(100)"/>
+            <column name="DESCRIPTION" type="varchar(1000)"/>
+            <column name="COURSE_IDD" type="int"/>
+            <column name="ROOM_IDD" type="int"/>
+            <column name="LESSON_DATE_START" type="timestamp(0)"/>
+            <column name="LESSON_DATE_END" type="timestamp(0)"/>
+            <column name="EXTRA_INSTRUMENTS" type="varchar(1000)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="LESSON"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="20221012-09" author="gilyova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="LESSON_TO_INSTRUMENT" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы LESSON_TO_INSTRUMENT</comment>
+        <createTable tableName="LESSON_TO_INSTRUMENT">
+            <column name="ID" type="serial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LESSON_IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INSTRUMENT_IDD" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="LESSON_TO_INSTRUMENT"/>
+        </rollback>
+    </changeSet>
     
 </databaseChangeLog>
